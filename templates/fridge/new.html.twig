@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Fridge{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em;  }
+    .main-wrapper #add_fridge { width: 35%; }
+    .main-wrapper #name_fridge { width: 15%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+
+<div class="main-wrapper">
+    <h1>Dodaj nową lodówkę</h1>
+    <form action="{{ path('app_fridge_new') }}" method="post">
+        <label for="name">Nazwa:</label>
+        <input id="name_fridge" type="text" name="name" required>
+
+        <label for="location">Lokacja:</label>
+        <input type="text" name="location" required>
+
+        <input id="add_fridge" type="submit" value="Add Fridge">
+    </form>
+</div>
+{% endblock %}

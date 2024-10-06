@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Edit User Role</h1>
+    <form action="{{ path('app_user_role_edit', {id: userRole.id}) }}" method="POST">
+        <label for="user_id">User:</label>
+        <select name="user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}" {% if user.id == userRole.user_id.id %}selected{% endif %}>{{ user.username }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="role_id">Role:</label>
+        <select name="role_id">
+            {% for role in roles %}
+                <option value="{{ role.id }}" {% if role.id == userRole.role_id.id %}selected{% endif %}>{{ role.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{{ path('app_user_role_list') }}">Back to Roles List</a>
+    </div>
+{% endblock %}

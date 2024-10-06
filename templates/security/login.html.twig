@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+</style>
+    <h1>Login</h1>
+
+    <form action="{{ path('security_login') }}" method="post">
+        <label for="username">Username or Email:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" required>
+
+        <button type="submit">Login</button>
+
+        
+
+        {% if error %}
+            <div class="error">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+    </form>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Fridges{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+
+<div class="main-wrapper">
+    <h1>Zarządzaj lodówkami 🧊</h1>
+
+    <div class="fridge-list">
+        <h2>Istniejące lodówki:</h2>
+        {% if fridges is empty %}
+            <p class="error">Brak dostępnych lodówek.</p>
+        {% else %}
+            <ul>
+                {% for fridge in fridges %}
+                    <li>
+                        {{ fridge.name }} ({{ fridge.location }})
+                        <a href="{{ path('app_fridge_edit', {id: fridge.id}) }}">Edit</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <form action="{{ path('app_fridge_new') }}" method="post">
+        <h2>Dodaj nową lodówkę:</h2>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <div>
+            <label for="name">Nazwa lodówki:</label>
+            <input type="text" id="name" name="name" value="{{ old_name|default('') }}">
+        </div>
+        <div>
+            <label for="location">Lokacja:</label>
+            <input type="text" id="location" name="location" value="{{ old_location|default('') }}">
+        </div>
+        <button type="submit">Dodaj Fridge</button>
+    </form>
+</div>
+{% endblock %}

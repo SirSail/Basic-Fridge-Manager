@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Details{% endblock %}
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+<div class="main-wrapper">
+    <h1>Assign New Role</h1>
+    <form action="{{ path('app_user_role_new') }}" method="POST">
+        <label for="user_id">Select User:</label>
+        <select name="user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="role_id">Select Role:</label>
+        <select name="role_id">
+            {% for role in roles %}
+                <option value="{{ role.id }}">{{ role.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Assign Role</button>
+    </form>
+    <a href="{{ path('app_user_role_list') }}">Back to Roles List</a>
+    </div>
+{% endblock %}

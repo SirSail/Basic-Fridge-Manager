@@ -3,3 +3,14 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+    
+app_fridge_list:
+    path: /fridge/list
+    controller: App\Controller\FridgeController::list
+
+app_fridge_new:
+    path: /fridge/new
+    controller: App\Controller\FridgeController::new
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register

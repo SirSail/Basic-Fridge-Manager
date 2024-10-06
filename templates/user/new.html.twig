@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+<div class="main-wrapper">
+    <h1>Stwórz nowego użytkownika 🤵</h1>
+    <form action="{{ path('app_user_new') }}" method="POST">
+        <label for="username">Nazwa:</label>
+        <input type="text" name="username" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="password">Hasło</label>
+        <input type="password" name="password" required><br>
+
+        <button type="submit">Stwórz</button>
+    </form>
+    <a href="{{ path('app_user_list') }}">Wróc do listy</a>
+    </div>
+{% endblock %}

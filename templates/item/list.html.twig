@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zarządzaj produktami{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+<div class="main-wrapper">
+    <h1>Zarządzaj przedmiotami 🍔 </h1>
+    <div class="item-list">
+        <h2>Istniejące przedmioty:</h2>
+        {% if items is empty %}
+            <p class="error">Brak dostępnych produktów</p>
+        {% else %}
+            <ul>
+                {% for item in items %}
+                    <li>
+                       <a href="{{ path('app_item_show', { 'id': item.id }) }}">{{ item.name }}</a>
+            - Category: {{ item.category ? item.category.name : 'No category' }}
+            <a href="{{ path('app_item_edit', { 'id': item.id }) }}" class="btn-edit">Edytuj</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <a href="{{ path('app_item_new') }}">Dodaj nowy produkt</a>
+</div>
+{% endblock %}

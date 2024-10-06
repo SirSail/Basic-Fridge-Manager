@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add New Fridge Item{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+</style>
+
+<h1>Add New Fridge Item</h1>
+
+<form action="{{ path('app_fridge_item_new') }}" method="post">
+    <label for="fridge">Fridge:</label>
+    <select name="fridge_id" id="fridge">
+        {% for fridge in fridges %}
+            <option value="{{ fridge.id }}">{{ fridge.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="item">Item:</label>
+    <select name="item_id" id="item">
+        {% for item in items %}
+            <option value="{{ item.id }}">{{ item.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" min="1">
+
+    <label for="expiration_date">Expiration Date:</label>
+    <input type="date" name="expiration_date" id="expiration_date">
+
+    <input type="submit" value="Add">
+</form>
+
+{% endblock %}
+

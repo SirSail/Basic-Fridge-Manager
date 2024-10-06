@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Categories{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+</style>
+<div class="main-wrapper">
+    <h1>Kategorie Produktów &#128209;&#65039;</h1>
+
+    <div class="category-list">
+        <h2>Istniejące Kategorie:</h2>
+        {% if categories is empty %}
+            <p class="error">Brak dostępnych kategorii</p>
+        {% else %}
+            <ul>
+                {% for category in categories %}
+                    <li>
+                        {{ category.name }}
+                        <a href="{{ path('app_category_edit', {id: category.id}) }}">Edit</a>
+                        <form action="{{ path('app_category_delete', {id: category.id}) }}" method="post" style="display:inline;">
+                            <button type="submit">Usun</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <a href="{{ path('app_category_new') }}">Dodaj Nową </a>
+</div>
+{% endblock %}

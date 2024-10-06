@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+<div class="main-wrapper">
+    <h1>Lista użytkowników 🧾</h1>
+    <ul>
+        {% for user in users %}
+            <li>
+                {{ user.username }} - {{ user.email }}
+                <a href="{{ path('app_user_show', {id: user.id}) }}">Pokaż</a>
+                <a href="{{ path('app_user_edit', {id: user.id}) }}">Edytuj</a>
+                <form action="{{ path('app_user_delete', {id: user.id}) }}" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button type="submit">Usuń</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('app_user_new') }}">Stwórz nowego użytkownika</a>
+    </div>
+{% endblock %}

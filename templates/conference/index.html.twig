@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fridge Manager{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper a { display: block; margin: 0.5em 0; font-size: 1.2em; text-decoration: none; color: #007BFF; }
+    .main-wrapper a:hover { text-decoration: underline; }
+</style>
+
+<div class="main-wrapper">
+    <h1>Fridge Manager &#129482;</h1> <!-- Użycie encji emoji 🧊 -->
+
+    <p>Witaj w aplikacji do zarządzania zawartością lodówki! Wybierz jedną z opcji poniżej:</p>
+
+    <a href="{{ path('app_fridge_list') }}">&#128295; Zarządzaj lodówkami</a> <!-- Encja emoji 🛠 -->
+    <a href="{{ path('app_item_list') }}">&#128221; Zarządzaj przedmiotami</a> <!-- Encja emoji 📝 -->
+    <a href="{{ path('app_user_list') }}">&#128100; Zarządzaj użytkownikami</a> <!-- Encja emoji 👤 -->
+    <a href="{{ path('app_category_list') }}">&#127991; Zarządzaj kategoriami</a> <!-- Encja emoji 🏷 -->
+    <a href="{{ path('app_fridge_item_list') }}">&#129529; Zawartość lodówki</a> <!-- Encja emoji 🧺 -->
+</div>
+{% endblock %}
+
+

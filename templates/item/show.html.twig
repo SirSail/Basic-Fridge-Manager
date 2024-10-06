@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informacje o produkcie{% endblock %}
+
+{% block body %}
+<div class="main-wrapper">
+    <h1>{{ item.name }}</h1>
+    <p><strong>Opis:</strong> {{ item.description }}</p>
+    <a href="{{ path('app_item_list') }}">Wróc do listy</a>
+</div>
+{% endblock %}

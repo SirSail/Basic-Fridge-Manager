@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Fridge Items{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+</style>
+<h1>Fridge Items</h1>
+
+{% if fridgeItems is empty %}
+    <p>No items in the fridge.</p>
+{% else %}
+    <ul>
+    {% for fridgeItem in fridgeItems %}
+        <li>
+        {% if fridgeItem.item %}
+            {{ fridgeItem.item.name }} ({{ fridgeItem.quantity }}) - Expiration:
+            {{ fridgeItem.expirationDate ? fridgeItem.expirationDate|date('Y-m-d') : 'N/A' }}
+        {% else %}
+            Unknown item ({{ fridgeItem.quantity }}) - Expiration:
+            {{ fridgeItem.expirationDate ? fridgeItem.expirationDate|date('Y-m-d') : 'N/A' }}
+        {% endif %}
+        <a href="{{ path('app_fridge_item_show', { 'id': fridgeItem.id }) }}">Details</a>
+        <a href="{{ path('app_fridge_item_edit', { 'id': fridgeItem.id }) }}">Edit</a>
+         <form action="{{ path('app_fridge_item_delete', { 'id': fridgeItem.id }) }}" method="post" style="display:inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fridgeItem.id) }}">
+                <button type="submit" onclick="return confirm('Are you sure?');">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="{{ path('app_fridge_item_new') }}">Add new fridge item</a>
+{% endblock %}
+

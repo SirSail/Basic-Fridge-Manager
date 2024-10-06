@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodaj nowy produkt{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper .fridge-list { margin-top: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em;  }
+    .main-wrapper #add_item { width: 35%;}
+    .main-wrapper #name_item { width: 15%;}
+    .main-wrapper button { padding: 0.5em 1em; }
+    .error { color: red; }
+</style>
+<div class="main-wrapper">
+    <h1>Dodaj nowy produkt</h1>
+    <form action="{{ path('app_item_new') }}" method="post">
+        <label for="name">Nazwa:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="description">Opis:</label>
+        <textarea name="description" id="description"></textarea>
+
+        <label for="category_id">Kategoria:</label>
+        <select name="category_id" id="category_id" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Dodaj nowy">
+    </form>
+</div>
+{% endblock %}

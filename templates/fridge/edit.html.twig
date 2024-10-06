@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Fridge{% endblock %}
+
+{% block body %}
+<style>
+    .main-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .main-wrapper h1 { margin-bottom: 1em; }
+    .main-wrapper form { margin-top: 2em; }
+    .main-wrapper label { display: block; margin-bottom: 0.5em; }
+    .main-wrapper input, .main-wrapper button { margin-bottom: 1em; }
+    .main-wrapper input { padding: 0.5em; width: 100%; }
+    .main-wrapper button { padding: 0.5em 1em; }
+</style>
+
+<div class="main-wrapper">
+    <h1>Edytuj Lodówkę &#128176;</h1>
+
+     <form action="{{ path('app_fridge_edit', { id: fridge.id }) }}" method="post">
+        <label for="name">Nazwa:</label>
+        <input id="name_fridge" type="text" name="name" value="{{ fridge.name }}" required>
+
+        <label for="location">Lokacja lodówki:</label>
+        <input type="text" name="location" value="{{ fridge.location }}" required>
+
+        <input id="edit_fridge" type="submit" value="Save Changes">
+    </form>
+
+    
+    </div>
+{% endblock %}
